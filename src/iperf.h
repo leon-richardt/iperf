@@ -263,6 +263,7 @@ struct iperf_test
     char     *bind_dev;                         /* bind to network device */
     TAILQ_HEAD(xbind_addrhead, xbind_entry) xbind_addrs; /* all -X opts */
     int       bind_port;                        /* --cport option */
+    int control_port;                           /* --control-port option */
     int       server_port;
     int       omit;                             /* duration of omit period (-O flag) */
     int       duration;                         /* total duration of test (-t flag) */

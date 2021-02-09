@@ -934,6 +934,7 @@ iperf_parse_arguments(struct iperf_test *test, int argc, char **argv)
         {"bind-dev", required_argument, NULL, OPT_BIND_DEV},
 #endif /* HAVE_SO_BINDTODEVICE */
         {"cport", required_argument, NULL, OPT_CLIENT_PORT},
+        {"control-port", required_argument, NULL, OPT_CONTROL_PORT},
         {"set-mss", required_argument, NULL, 'M'},
         {"no-delay", no_argument, NULL, 'N'},
         {"version4", no_argument, NULL, '4'},
@@ -1199,6 +1200,14 @@ iperf_parse_arguments(struct iperf_test *test, int argc, char **argv)
 		    return -1;
 		}
                 test->bind_port = portno;
+                break;
+            case OPT_CONTROL_PORT:
+                portno = atoi(optarg);
+                if (portno < 1 || portno > 65535) {
+                    i_errno = IEBADPORT;
+                    return -1;
+                }
+                test->control_port = portno;
                 break;
             case 'M':
                 test->settings->mss = atoi(optarg);
